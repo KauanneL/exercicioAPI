@@ -1,0 +1,11 @@
+<h1>{{filme()?.Title}}</h1>
+
+<p>
+    <img class="poster" [src]="filme()?.Poster" alt="Poster do Filme">
+</p>
+
+<ul>
+    <li>Ano: {{filme()?.Year}}</li>
+    <li>Diretor: {{filme()?.Director}}</li>
+    <li>Atores: {{filme()?.Actors}}</li>
+</ul>
