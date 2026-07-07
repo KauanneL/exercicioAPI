@@ -1,11 +1,41 @@
-<h1>{{filme()?.Title}}</h1>
+<h1>Procure por filmes</h1>
 
-<p>
-    <img class="poster" [src]="filme()?.Poster" alt="Poster do Filme">
+<h2>Agenda de Contatos</h2>
+
+  <form [formGroup]="formFilmes" (ngSubmit)="obterFilmes(formFilmes.value.nome)">
+
+    <div class="mb-3">
+      <label class="form-label">Nome</label>
+
+      <input
+        type="text"
+        class="form-control"
+        formControlName="nome">
+
+      @if (formFilmes.get('nome')?.touched &&
+           formFilmes.get('nome')?.invalid) {
+        <small class="text-danger">
+          Nome é obrigatório.
+        </small>
+      }
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary">
+      Adicionar Contato
+    </button>
+
+  </form>
+
+@for (film of filmes();track $index){
+    <p>
+    <img class="poster" [src]="film?.Poster" alt="Poster do Filme">
 </p>
 
 <ul>
-    <li>Ano: {{filme()?.Year}}</li>
-    <li>Diretor: {{filme()?.Director}}</li>
-    <li>Atores: {{filme()?.Actors}}</li>
+    <li>Título: {{film?.Title}}</li>
+    <li>Ano: {{film?.Year}}</li>
+    <li>Tipo: {{film?.Type}}</li>
 </ul>
+}

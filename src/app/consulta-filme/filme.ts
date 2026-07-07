@@ -8,3 +8,10 @@ export type Filme ={
     Plot:string
     Poster:string
 }
+
+export type Filmes ={
+    Title: string
+    Year: string
+    Type: string
+    Poster:string
+}
