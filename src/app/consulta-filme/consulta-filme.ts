@@ -17,7 +17,7 @@ import {
 export class ConsultaFilme {
   #filmeService=inject(FilmeService)
   protected filme= signal< Filme | undefined>(undefined)
-  filmes = signal<Filmes[]>([]);
+  filmes = signal<Filme[]>([]);
   #formBuilder = inject(FormBuilder);
   protected formFilmes: FormGroup;
   constructor(){
@@ -33,20 +33,9 @@ export class ConsultaFilme {
       }
     )
   }
-  obterFilmes(titulo:string){
-    if (this.formFilmes.invalid) {
-      this.formFilmes.markAllAsTouched();
-      return;
-    }
-    this.#filmeService.obterFilmes(titulo).subscribe(
-      res => {
-        if (res) {
-           Object.keys(res).forEach(filme => {
-            this.filmes.push(filme)
-           })} else {
-          
-        }
-      }
-    )
-  }
+  obterFilmes(titulo: string) {
+  this.#filmeService.obterFilmes(titulo).subscribe(res => {
+    this.filmes.set(res.Search);
+  });
+}
 }

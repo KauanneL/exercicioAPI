@@ -1,41 +1,74 @@
-<h1>Procure por filmes</h1>
+<div class="container py-4">
 
-<h2>Agenda de Contatos</h2>
+  <h2 class="text-center mb-4">Consulta de Filmes</h2>
 
-  <form [formGroup]="formFilmes" (ngSubmit)="obterFilmes(formFilmes.value.nome)">
+  <form
+    [formGroup]="formFilmes"
+    (ngSubmit)="obterFilmes(formFilmes.value.nome)">
 
-    <div class="mb-3">
-      <label class="form-label">Nome</label>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-8">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Digite o nome do filme..."
+            formControlName="nome">
 
-      <input
-        type="text"
-        class="form-control"
-        formControlName="nome">
+          <button
+            class="btn btn-primary"
+            type="submit">
+            Buscar
+          </button>
+        </div>
 
-      @if (formFilmes.get('nome')?.touched &&
-           formFilmes.get('nome')?.invalid) {
-        <small class="text-danger">
-          Nome é obrigatório.
-        </small>
-      }
+        @if (formFilmes.get('nome')?.touched &&
+             formFilmes.get('nome')?.invalid) {
+          <small class="text-danger">
+            Informe o nome do filme.
+          </small>
+        }
+      </div>
     </div>
-
-    <button
-      type="submit"
-      class="btn btn-primary">
-      Adicionar Contato
-    </button>
 
   </form>
 
-@for (film of filmes();track $index){
-    <p>
-    <img class="poster" [src]="film?.Poster" alt="Poster do Filme">
-</p>
+  <div class="row g-4">
 
-<ul>
-    <li>Título: {{film?.Title}}</li>
-    <li>Ano: {{film?.Year}}</li>
-    <li>Tipo: {{film?.Type}}</li>
-</ul>
-}
+    @for (film of filmes(); track film.imdbID) {
+
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+        <div class="card h-100 shadow-sm">
+
+          <img
+            [src]="film.Poster"
+            [alt]="film.Title"
+            class="card-img-top"
+            style="height: 400px; object-fit: cover;">
+
+          <div class="card-body">
+
+            <h5 class="card-title">
+              {{ film.Title }}
+            </h5>
+
+            <p class="card-text mb-1">
+              <strong>Ano:</strong> {{ film.Year }}
+            </p>
+
+            <p class="card-text">
+              <strong>Tipo:</strong> {{ film.Type }}
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>

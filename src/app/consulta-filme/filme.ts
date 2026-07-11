@@ -1,17 +1,11 @@
 export type Filme ={
     Title: string
     Year: string
-    Genre:string
-    Director: string
-    Actors:string
-    Country:string
-    Plot:string
     Poster:string
+    Type: string
+    imdbID:string
 }
 
 export type Filmes ={
-    Title: string
-    Year: string
-    Type: string
-    Poster:string
+    Search: Filme[];
 }
